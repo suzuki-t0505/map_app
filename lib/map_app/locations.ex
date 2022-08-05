@@ -15,4 +15,10 @@ defmodule MapApp.Locations do
     |> Location.changeset(attrs)
     |> Repo.insert()
   end
+
+  def update_location(location, attrs) do
+    location
+    |> Location.changeset(attrs)
+    |> Repo.update()
+  end
 end

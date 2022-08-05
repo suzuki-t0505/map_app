@@ -29,4 +29,23 @@ defmodule MapAppWeb.MapController do
     location = Locations.get_location(id)
     render(conn, "show.html", location: location)
   end
+
+  def edit(conn, %{"id" => id}) do
+    location = Locations.get_location(id)
+    changeset = Location.changeset(location, %{})
+    render(conn, "edit.html", location: location, changeset: changeset)
+  end
+
+  def update(conn, %{"id" => id, "location" => attrs}) do
+    location = Locations.get_location(id)
+    case Locations.update_location(location, attrs) do
+      {:ok, location} ->
+        conn
+        |> put_flash(:info, "編集しました。")
+        |> redirect(to: Routes.map_path(conn, :show, location))
+
+      {:error, cs} ->
+        render(conn, "edit.html", location: location, changeset: cs)
+    end
+  end
 end

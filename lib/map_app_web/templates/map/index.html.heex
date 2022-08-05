@@ -21,6 +21,7 @@
       <td><%= location.location_name %></td>
       <td>
         <%= link "詳細", to: Routes.map_path(@conn, :show, location) %>
+        | <%= link "編集", to: Routes.map_path(@conn, :edit, location) %>
       </td>
     </tr>
   <% end %>
