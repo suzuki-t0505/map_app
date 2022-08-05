@@ -13,6 +13,7 @@
     <td><%= @location.location_name %></td>
     <td>
       <%= link "編集", to: Routes.map_path(@conn, :edit, @location) %>
+      | <%= link "削除", to: Routes.map_path(@conn, :delete, @location), method: :delete %>
     </td>
   </tr>
 </table>

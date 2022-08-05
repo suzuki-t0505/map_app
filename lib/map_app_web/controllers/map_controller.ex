@@ -48,4 +48,13 @@ defmodule MapAppWeb.MapController do
         render(conn, "edit.html", location: location, changeset: cs)
     end
   end
+
+  def delete(conn, %{"id" => id}) do
+    location = Locations.get_location(id)
+    {:ok, _location} = Locations.delete_location(location)
+
+    conn
+    |> put_flash(:info, "削除しました。")
+    |> redirect(to: Routes.map_path(conn, :index))
+  end
 end

@@ -26,6 +26,7 @@ defmodule MapAppWeb.Router do
     get "/map/:id/edit", MapController, :edit
     patch "/map/:id", MapController, :update
     put "/map/:id", MapController, :update
+    delete "/map/:id", MapController, :delete
   end
 
   # Other scopes may use custom stacks.

@@ -21,4 +21,8 @@ defmodule MapApp.Locations do
     |> Location.changeset(attrs)
     |> Repo.update()
   end
+
+  def delete_location(location) do
+    Repo.delete(location)
+  end
 end

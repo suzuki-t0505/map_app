@@ -1,6 +1,6 @@
 <%
   first_location = 
-    if @locations != [], do: hd(@locations), else: %{lat: 35.658581, lang: 139.745433}
+    if @locations != [], do: hd(@locations), else: %{lat: 35.658581, long: 139.745433}
 %>
 
 <%= link "座標登録", to: Routes.map_path(@conn, :new) %>
@@ -22,6 +22,7 @@
       <td>
         <%= link "詳細", to: Routes.map_path(@conn, :show, location) %>
         | <%= link "編集", to: Routes.map_path(@conn, :edit, location) %>
+        | <%= link "削除", to: Routes.map_path(@conn, :delete, location), method: :delete %>
       </td>
     </tr>
   <% end %>
