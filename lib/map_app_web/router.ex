@@ -20,8 +20,9 @@ defmodule MapAppWeb.Router do
     get "/", PageController, :index
 
     get "/map", MapController, :index
-    get "map/new", MapController, :new
+    get "/map/new", MapController, :new
     post "/map", MapController, :create
+    get "/map/:id", MapController, :show
   end
 
   # Other scopes may use custom stacks.

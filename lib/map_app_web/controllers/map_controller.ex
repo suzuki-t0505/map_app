@@ -24,4 +24,9 @@ defmodule MapAppWeb.MapController do
         render(conn, "new.html", changeset: cs)
     end
   end
+
+  def show(conn, %{"id" => id}) do
+    location = Locations.get_location(id)
+    render(conn, "show.html", location: location)
+  end
 end

@@ -6,6 +6,10 @@ defmodule MapApp.Locations do
     Repo.all(Location)
   end
 
+  def get_location(id) do
+    Repo.get(Location, id)
+  end
+
   def create(attrs) do
     %Location{}
     |> Location.changeset(attrs)
