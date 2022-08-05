@@ -1,12 +1,37 @@
+<%
+  first_location = 
+    if @locations != [], do: hd(@locations), else: %{lat: 35.658581, lang: 139.745433}
+%>
+
+<%= link "座標登録", to: Routes.map_path(@conn, :new) %>
+
 <div id="map" style="height: 500px"></div>
+
+<table>
+  <tr>
+    <th>緯度</th>
+    <th>経度</th>
+    <th>場所名</th>
+  </tr>
+  <%= for location <- @locations do %>
+    <tr>
+      <td><%= location.lat %></td>
+      <td><%= location.long %></td>
+      <td><%= location.location_name %></td>
+    </tr>
+  <% end %>
+</table>
+
 <script>
-var map = L.map('map').setView([51.505, -0.09], 13);
+var map = L.map('map').setView([<%= first_location.lat %>, <%= first_location.long %>], 12);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-L.marker([51.5, -0.09]).addTo(map)
-    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+<%= for location <- @locations do %>
+  L.marker([<%= location.lat %>, <%= location.long %>]).addTo(map)
+    .bindPopup('<%= location.location_name %>')
     .openPopup();
+<% end %>
 </script>

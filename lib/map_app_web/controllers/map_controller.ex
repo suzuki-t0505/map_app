@@ -4,7 +4,8 @@ defmodule MapAppWeb.MapController do
   alias MapApp.Locations
 
   def index(conn, _params) do
-    render(conn, "index.html")
+    locations = Locations.get_locations()
+    render(conn, "index.html", locations: locations)
   end
 
   def new(conn, _params) do
@@ -18,7 +19,7 @@ defmodule MapAppWeb.MapController do
         conn
         |> put_flash(:info, "座標が登録できました。")
         |> redirect(to: Routes.map_path(conn, :index))
-        
+
       {:error, cs} ->
         render(conn, "new.html", changeset: cs)
     end
