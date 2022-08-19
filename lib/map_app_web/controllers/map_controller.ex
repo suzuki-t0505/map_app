@@ -3,6 +3,11 @@ defmodule MapAppWeb.MapController do
   alias MapApp.Locations.Location
   alias MapApp.Locations
 
+  def index(conn, %{"serach_text" => text}) do
+    locations = Locations.search_location(text)
+    render(conn, "index.html", locations: locations)
+  end
+
   def index(conn, _params) do
     locations = Locations.get_locations()
     render(conn, "index.html", locations: locations)

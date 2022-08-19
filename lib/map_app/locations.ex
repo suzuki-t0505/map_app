@@ -1,9 +1,19 @@
 defmodule MapApp.Locations do
+  import Ecto.Query
   alias MapApp.Repo
   alias MapApp.Locations.Location
 
   def get_locations() do
     Repo.all(Location)
+  end
+
+  def search_location(text) do
+    query =
+      from(l in Location,
+        where: like(l.location_name, ^"%#{text}%")
+      )
+
+    Repo.all(query)
   end
 
   def get_location(id) do
